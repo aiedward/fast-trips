@@ -1,3 +1,4 @@
+from __future__ import print_function
 __copyright__ = "Copyright 2015-2017 Contributing Entities"
 __license__   = """
     Licensed under the Apache License, Version 2.0 (the "License");
@@ -922,7 +923,7 @@ class Assignment:
 
                             del process_dict[worker_num]["working_on"]
                         else:
-                            print "Unexpected done queue contents: " + str(result)
+                            print("Unexpected done queue contents: " + str(result))
 
                     except Queue.Empty:
                         # This is normal

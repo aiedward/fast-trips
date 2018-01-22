@@ -1,3 +1,4 @@
+from __future__ import print_function
 import numpy as np
 import os
 import pandas as pd
@@ -47,8 +48,8 @@ def verify_dataframe(ctl_path, test_path, dtypes, join_cols, compare_cols):
         col_ctl = '{}_ctl'.format(col)
         col_test = '{}_test'.format(col)
         if ~np.isclose(df_join[col_ctl], df_join[col_test]).any():
-            print '{}: Column values do not match.'.format(col)
-            print df_join[~np.isclose(df_join[col_ctl], df_join[col_test])]
+            print('{}: Column values do not match.'.format(col))
+            print(df_join[~np.isclose(df_join[col_ctl], df_join[col_test])])
             assert False
 
 

@@ -1,6 +1,8 @@
 """
 Functions to simplify running Fast-Trips.
 """
+from __future__ import print_function
+from __future__ import absolute_import
 
 __copyright__ = "Copyright 2015-2017 Contributing Entities"
 __license__   = """
@@ -16,7 +18,7 @@ __license__   = """
     See the License for the specific language governing permissions and
     limitations under the License.
 """
-import fasttrips
+from . import fasttrips
 import argparse, os, pandas, re, sys, datetime
 
 def run_setup(input_network_dir,
@@ -68,7 +70,7 @@ def run_setup(input_network_dir,
 
         debug_output_columnns -- boolean to activate extra columns for debugging (default: False)
     """
-    print kwargs
+    print(kwargs)
 
     if not input_network_dir:
         msg = "Must specify where to find input networks"
@@ -98,7 +100,7 @@ def run_setup(input_network_dir,
 
     # Setup Output Directory
     if not output_folder:
-        output_folder = "output_%s_iter%d_%s" % (pathfinding_type, iters, "cap" if (kwargs.has_key("capacity") and kwargs["capacity"]==True) else "nocap")
+        output_folder = "output_%s_iter%d_%s" % (pathfinding_type, iters, "cap" if ("capacity" in kwargs and kwargs["capacity"]==True) else "nocap")
 
     # don't override full run results
     if trace_only:
@@ -114,7 +116,7 @@ def run_setup(input_network_dir,
         os.mkdir(output_dir)
 
     if not os.path.exists(full_output_dir):
-        print "Creating full output dir [%s]" % full_output_dir
+        print("Creating full output dir [%s]" % full_output_dir)
         os.mkdir(full_output_dir)
 
     # Create fast-trips instance
@@ -126,7 +128,7 @@ def run_setup(input_network_dir,
     if iters > 0:
         fasttrips.Assignment.MAX_ITERATIONS          = int(iters)
 
-    if kwargs.has_key("number_of_processes"):
+    if "number_of_processes" in kwargs:
         fasttrips.Assignment.NUMBER_OF_PROCESSES = kwargs["number_of_processes"]
 
     if "trace_ids" in kwargs.keys():
@@ -134,7 +136,7 @@ def run_setup(input_network_dir,
 
     if trace_only:
         if len(fasttrips.Assignment.TRACE_IDS) == 0:
-            print "Trace only requested but no trace IDs are specified in configuration."
+            print("Trace only requested but no trace IDs are specified in configuration.")
             sys.exit(2)
         fasttrips.Assignment.DEBUG_TRACE_ONLY    = True
         fasttrips.Assignment.NUMBER_OF_PROCESSES = 1

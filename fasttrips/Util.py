@@ -268,7 +268,7 @@ class Util:
             # get the columns
             df_file = open(output_file, 'rb')
             df_reader = csv.reader(df_file, delimiter=",")
-            header_row = df_reader.next()
+            header_row = next(df_reader)
             df_file.close()
 
         for col_idx in range(len(df_cols)):

@@ -1,3 +1,4 @@
+from __future__ import print_function
 import os
 
 import pytest
@@ -19,7 +20,7 @@ def test_dispersion():
         
         full_output_dir = os.path.join(OUTPUT_DIR,"test_dispers_%4.2f" % d)
         if not os.path.exists(full_output_dir): os.mkdir(full_output_dir)
-        print "STARTING RUN"
+        print("STARTING RUN")
         r = Run.run_fasttrips(
             input_network_dir= INPUT_NETWORKS,
             input_demand_dir = INPUT_DEMAND,
@@ -32,7 +33,7 @@ def test_dispersion():
             dispersion       = d,
             test_size        = 100 )
         
-        print "FINISHED RUN"
+        print("FINISHED RUN")
         assert r["passengers_arrived"] > 0
         assert r["capacity_gap"]      < 0.001
         assert r["passengers_missed"] == 0
